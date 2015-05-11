@@ -31,7 +31,12 @@ public class Compat {
 			View views[] = (View[]) field.get(winManagerImpl);
 			
 			if(views != null && views.length >= 0){
-				return views[0];
+				for (int i = views.length - 1; i >= 0; i--) {
+					View view = views[i];
+					if(view.getClass().getSimpleName().equals("DecorView")){
+						return view;
+					}
+				}
 			}
 		} catch (Exception e) {
 			Log.wtf("test", e);
@@ -55,7 +60,12 @@ public class Compat {
 			ArrayList<View> views = (ArrayList<View>) field.get(object);
 			
 			if(views != null && !views.isEmpty()){
-				return views.get(0);
+				for (int i = views.size() - 1; i >= 0; i--) {
+					View view = views.get(i);
+					if(view.getClass().getSimpleName().equals("DecorView")){
+						return view;
+					}
+				}
 			}
 			
 		} catch (Exception e) {
